@@ -31,29 +31,28 @@ function isSpecialCharacter(str) {
 
 
 function createAlternatingCapsString(alphabets) {
-  // Step 1: Reverse each string individually
+  
   const reversedStrings = alphabets.map(str => str.split("").reverse().join(""));
 
-  // Step 2: Reverse the order of strings
+  
   const reversedOrder = reversedStrings.reverse();
 
-  // Step 3: Concatenate all
   const concatenated = reversedOrder.join("");
 
-  // Step 4: Apply alternating caps starting uppercase
+  
   let result = "";
   for (let i = 0; i < concatenated.length; i++) {
     result += i % 2 === 0
-      ? concatenated[i].toUpperCase()   // uppercase on even index
-      : concatenated[i].toLowerCase();  // lowercase on odd index
+      ? concatenated[i].toUpperCase()   
+      : concatenated[i].toLowerCase();  
   }
 
   return result;
 }
 
-// Test
+
 console.log(createAlternatingCapsString(["A","ABcD","DOE"])); 
-// Output: "EoDdCbAa"
+
 
 
 
