@@ -30,11 +30,17 @@ function isSpecialCharacter(str) {
 }
 
 
-function createAlternatingCapsString(alphabets) {
-  
+function createAlternatingCapsString(data) {
+  // Extract only alphabetic values
+  const alphabets = data.filter(item => /^[a-zA-Z]+$/.test(item));
+
+  // Concatenate into one string
   const concatenated = alphabets.join("");
+
+  // Reverse it
   const reversed = concatenated.split("").reverse().join("");
 
+  // Apply alternating caps
   let result = "";
   for (let i = 0; i < reversed.length; i++) {
     if (i % 2 === 0) {
@@ -43,8 +49,10 @@ function createAlternatingCapsString(alphabets) {
       result += reversed[i].toUpperCase();
     }
   }
+
   return result;
 }
+
 
 
 app.post("/bfhl", (req, res) => {
