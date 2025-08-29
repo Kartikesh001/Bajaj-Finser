@@ -30,28 +30,30 @@ function isSpecialCharacter(str) {
 }
 
 
-function createAlternatingCapsString(data) {
-  // Extract only alphabetic values
-  const alphabets = data.filter(item => /^[a-zA-Z]+$/.test(item));
+function createAlternatingCapsString(alphabets) {
+  // Step 1: Reverse each string individually
+  const reversedStrings = alphabets.map(str => str.split("").reverse().join(""));
 
-  // Concatenate into one string
-  const concatenated = alphabets.join("");
+  // Step 2: Reverse the order of strings
+  const reversedOrder = reversedStrings.reverse();
 
-  // Reverse it
-  const reversed = concatenated.split("").reverse().join("");
+  // Step 3: Concatenate all
+  const concatenated = reversedOrder.join("");
 
-  // Apply alternating caps
+  // Step 4: Apply alternating caps starting uppercase
   let result = "";
-  for (let i = 0; i < reversed.length; i++) {
-    if (i % 2 === 0) {
-      result += reversed[i].toLowerCase();
-    } else {
-      result += reversed[i].toUpperCase();
-    }
+  for (let i = 0; i < concatenated.length; i++) {
+    result += i % 2 === 0
+      ? concatenated[i].toUpperCase()   // uppercase on even index
+      : concatenated[i].toLowerCase();  // lowercase on odd index
   }
 
   return result;
 }
+
+// Test
+console.log(createAlternatingCapsString(["A","ABcD","DOE"])); 
+// Output: "EoDdCbAa"
 
 
 
